@@ -214,3 +214,14 @@ FastBoard board = new FastBoard(player) {
     }
 });
 ```
+
+Also, when using it on a post-1.20.4 server with pre-1.20.4 clients, you can override the method `customScoresSupported()` and return `false` for older clients.
+For example using the ViaVersion API:
+```java
+FastBoard board = new FastBoard(player) {
+    @Override
+    public boolean customScoresSupported() {
+        return Via.getAPI().getPlayerVersion(getPlayer()) >= ProtocolVersion.v1_20_3.getVersion(); // or just 'return true;'
+    }
+});
+```
